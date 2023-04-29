@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2313285675529930099}
   - component: {fileID: 4257711074407897023}
   m_Layer: 8
-  m_Name: DeathPlane
+  m_Name: DeathPlanePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

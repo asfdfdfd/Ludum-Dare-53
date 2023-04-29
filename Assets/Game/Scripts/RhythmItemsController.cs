@@ -7,8 +7,11 @@ using Random = UnityEngine.Random;
 public class RhythmItemsController : MonoBehaviour
 {
     [SerializeField] private GameObject _prefabRhythmItem;
+    [SerializeField] private GameObject _prefabShitRhythmItem;
     
     [SerializeField] private List<GameObject> _rhythmItemSpawnPoints;
+
+    [SerializeField] private int _shitRhythmItemProbability = 10;
 
     private float _spawnTime = 1.0f;
     
@@ -28,9 +31,22 @@ public class RhythmItemsController : MonoBehaviour
 
     private void SpawnRhythmItem()
     {
-        int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
-        Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+        bool shouldDisplayShitItem = Random.Range(0, _shitRhythmItemProbability) == 9;
         
-        GameObject rhythmItem = Instantiate(_prefabRhythmItem, spawnPointPosition, Quaternion.identity);
+        if (shouldDisplayShitItem)
+        {
+            int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
+            Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+        
+            GameObject shitRhythmItem = Instantiate(_prefabShitRhythmItem, spawnPointPosition, Quaternion.identity);
+        } 
+        else
+        {
+            int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
+            Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+        
+            GameObject rhythmItem = Instantiate(_prefabRhythmItem, spawnPointPosition, Quaternion.identity);
+        }
+
     }
 }

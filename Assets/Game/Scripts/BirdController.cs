@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BirdController : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> _lanes;
 
-    [SerializeField] private AudioSource _rhythmItemPickupSound;
+    [FormerlySerializedAs("_rhythmItemPickupSound")] [SerializeField] private AudioSource _rhythmItemPickupAudioSource;
+    [SerializeField] private AudioSource _shitRhythmItemPickupAudioSource;
     
     public void MoveToStartupLane()
     {
@@ -43,10 +45,18 @@ public class BirdController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         GameObject otherGameObject = other.gameObject;
+        
         RhythmItemController rhythmItemController = otherGameObject.GetComponent<RhythmItemController>();
         if (rhythmItemController != null)
         {
-            _rhythmItemPickupSound.Play();
+            _rhythmItemPickupAudioSource.Play();
+            Destroy(otherGameObject);
+        }
+        
+        ShitRhythmItemController shitRhythmItemController = otherGameObject.GetComponent<ShitRhythmItemController>();
+        if (shitRhythmItemController != null)
+        {
+            _shitRhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
         }
     }
