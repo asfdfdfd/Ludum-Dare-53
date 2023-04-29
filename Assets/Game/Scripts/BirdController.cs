@@ -52,6 +52,12 @@ public class BirdController : MonoBehaviour
         RhythmItemController rhythmItemController = otherGameObject.GetComponent<RhythmItemController>();
         if (rhythmItemController != null)
         {
+            GameState.PointsCollected += GlobalGameplaySettingsComponent.Instance.PointsPerOneRhythmItem;
+            if (GameState.PointsCollected > GlobalGameplaySettingsComponent.Instance.PointsPerLevel)
+            {
+                GameState.PointsCollected = GlobalGameplaySettingsComponent.Instance.PointsPerLevel;
+            }
+            
             _rhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
         }
@@ -59,6 +65,12 @@ public class BirdController : MonoBehaviour
         ShitRhythmItemController shitRhythmItemController = otherGameObject.GetComponent<ShitRhythmItemController>();
         if (shitRhythmItemController != null)
         {
+            GameState.PointsCollected -= GlobalGameplaySettingsComponent.Instance.PointsPerOneRhythmItem;
+            if (GameState.PointsCollected <= 0)
+            {
+                GameState.PointsCollected = 0;
+            }
+            
             _shitRhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
         }

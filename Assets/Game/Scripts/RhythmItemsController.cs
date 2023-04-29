@@ -46,6 +46,8 @@ public class RhythmItemsController : MonoBehaviour
             _shouldSpawnItems = false;
             
             Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[1].transform.position, Quaternion.identity);
+            
+            return;
         }
         
         bool shouldDisplayShitItem = Random.Range(0, _shitRhythmItemProbability) == 9;
