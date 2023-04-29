@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2918548914244652735}
   - component: {fileID: 2247049182490165530}
   - component: {fileID: 4092619887199417808}
+  - component: {fileID: 8838491155031238931}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8838491155031238931
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579177659910575109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5958362384829529401, guid: 59036d5e9ad9424469ae58beddb00c1f, type: 3}
