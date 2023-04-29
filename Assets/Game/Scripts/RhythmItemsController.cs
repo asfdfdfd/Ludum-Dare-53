@@ -8,6 +8,7 @@ public class RhythmItemsController : MonoBehaviour
 {
     [SerializeField] private GameObject _prefabRhythmItem;
     [SerializeField] private GameObject _prefabShitRhythmItem;
+    [SerializeField] private GameObject _prefabEndLevel;
     
     [SerializeField] private List<GameObject> _rhythmItemSpawnPoints;
 
@@ -16,6 +17,10 @@ public class RhythmItemsController : MonoBehaviour
     private float _spawnTime = 1.0f;
     
     private float _spawnTimer = 0.0f;
+
+    private bool _shouldEndLevel = false;
+
+    private bool _shouldSpawnItems = true;
     
     private void Update()
     {
@@ -31,6 +36,18 @@ public class RhythmItemsController : MonoBehaviour
 
     private void SpawnRhythmItem()
     {
+        if (!_shouldSpawnItems)
+        {
+            return;
+        }
+        
+        if (_shouldEndLevel)
+        {
+            _shouldSpawnItems = false;
+            
+            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[1].transform.position, Quaternion.identity);
+        }
+        
         bool shouldDisplayShitItem = Random.Range(0, _shitRhythmItemProbability) == 9;
         
         if (shouldDisplayShitItem)
@@ -38,15 +55,20 @@ public class RhythmItemsController : MonoBehaviour
             int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
             Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
         
-            GameObject shitRhythmItem = Instantiate(_prefabShitRhythmItem, spawnPointPosition, Quaternion.identity);
+            Instantiate(_prefabShitRhythmItem, spawnPointPosition, Quaternion.identity);
         } 
         else
         {
             int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
             Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
         
-            GameObject rhythmItem = Instantiate(_prefabRhythmItem, spawnPointPosition, Quaternion.identity);
+            Instantiate(_prefabRhythmItem, spawnPointPosition, Quaternion.identity);
         }
 
+    }
+
+    public void EndLevel()
+    {
+        _shouldEndLevel = true;
     }
 }

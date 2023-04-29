@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class BirdController : MonoBehaviour
@@ -11,6 +12,8 @@ public class BirdController : MonoBehaviour
 
     [FormerlySerializedAs("_rhythmItemPickupSound")] [SerializeField] private AudioSource _rhythmItemPickupAudioSource;
     [SerializeField] private AudioSource _shitRhythmItemPickupAudioSource;
+
+    public UnityEvent levelEndEvent;
     
     public void MoveToStartupLane()
     {
@@ -59,5 +62,12 @@ public class BirdController : MonoBehaviour
             _shitRhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
         }
+        
+        EndLevelRhythmItemController endLevelRhythmItemController = otherGameObject.GetComponent<EndLevelRhythmItemController>();
+        if (endLevelRhythmItemController != null)
+        {
+            Destroy(otherGameObject);
+            levelEndEvent?.Invoke();
+        }        
     }
 }

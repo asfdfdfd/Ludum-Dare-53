@@ -611,6 +611,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _birdController: {fileID: 1486297209}
+  _rhythmItemsController: {fileID: 774804831}
+  _levelLengthInSeconds: 10
+  _endTreePrefab: {fileID: 7820108047679694948, guid: 76a9aa592790b4ae5acc80a023d2f70a,
+    type: 3}
+  _endTreeSpawnPoint: {fileID: 1984720288}
 --- !u!4 &774804830
 Transform:
   m_ObjectHideFlags: 0
@@ -641,6 +646,8 @@ MonoBehaviour:
   _prefabRhythmItem: {fileID: 4429363587894172866, guid: 0ffe879c98bd04928850171e5c91105c,
     type: 3}
   _prefabShitRhythmItem: {fileID: 2119979765499142647, guid: 8d015317527104b75b329b9df4ea5c70,
+    type: 3}
+  _prefabEndLevel: {fileID: 2119979765499142647, guid: 035df1664c7a94ced9f9b5569b382cb8,
     type: 3}
   _rhythmItemSpawnPoints:
   - {fileID: 1631864103}
@@ -1472,6 +1479,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1509951892}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1984720288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984720289}
+  m_Layer: 0
+  m_Name: EndTreeSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1984720289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984720288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.54, y: 0, z: 15.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5076416789224879707
 PrefabInstance:
