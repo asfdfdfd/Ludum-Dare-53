@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &801927013785855402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4902072984849790944}
+  - component: {fileID: 5657165355360892453}
+  m_Layer: 0
+  m_Name: "RoadsideSpawne\u043A"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4902072984849790944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801927013785855402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5657165355360892453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801927013785855402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865b6f952b48340fcbe6b7261e17071d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 2175965603372017388, guid: 8fbf1c9f0d1914824995f178cc7c6bf7, type: 3}
+  - {fileID: 6162288994958137257, guid: 737b495355cb54038ac2e7f4d5df0865, type: 3}
+  - {fileID: 1167333133820469808, guid: 94577419ecf504338b3215caf659eba3, type: 3}
+  - {fileID: 982048602460140988, guid: 8515f9b09673e42f192981578f34835b, type: 3}
+  - {fileID: 6412977084337966879, guid: f8c3302aa14a64b4887bb5f2d86110bb, type: 3}
+  - {fileID: 8744294073098370777, guid: 01c3d88ddc7244d69acf08483c27da91, type: 3}
+  - {fileID: 7432788859399263149, guid: cbafbab311ec34463a3a3194bacc7fbf, type: 3}
+  - {fileID: 3898941725350418079, guid: dfd23bcbe25e640c89068cfc245b7cb2, type: 3}
+  _spawnPauseSecondsMin: 1
+  _spawnPauseSecondsMax: 5

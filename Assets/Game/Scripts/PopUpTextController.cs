@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class PopUpTextController : MonoBehaviour
 {
-    private TextMeshPro _textMeshPro;
-
-    private void Awake()
-    {
-        _textMeshPro = GetComponent<TextMeshPro>();
-    }
+    [SerializeField] private TextMeshPro _textMeshPro;
 
     private void Start()
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class BirdController : MonoBehaviour
@@ -84,6 +85,8 @@ public class BirdController : MonoBehaviour
             
             _rhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
+
+            return;
         }
         
         ShitRhythmItemController shitRhythmItemController = otherGameObject.GetComponent<ShitRhythmItemController>();
@@ -101,6 +104,15 @@ public class BirdController : MonoBehaviour
             
             _shitRhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
+
+            return;
+        }
+
+        CatRhythmItemController catRhythmItemController = otherGameObject.GetComponent<CatRhythmItemController>();
+        if (catRhythmItemController != null)
+        {
+            SceneManager.LoadScene("DeathFromCatScene");
+            return;
         }
         
         EndLevelRhythmItemController endLevelRhythmItemController = otherGameObject.GetComponent<EndLevelRhythmItemController>();
@@ -108,6 +120,8 @@ public class BirdController : MonoBehaviour
         {
             Destroy(otherGameObject);
             levelEndEvent?.Invoke();
+
+            return;
         }        
     }
 }

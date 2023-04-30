@@ -13,6 +13,7 @@ public class RhythmItemsController : MonoBehaviour
     [SerializeField] private List<GameObject> _rhythmItemSpawnPoints;
 
     [SerializeField] private int _shitRhythmItemProbability = 10;
+    [SerializeField] private int _catRhythmItemProbability = 10;
 
     private float _spawnTime = 1.0f;
     
@@ -64,7 +65,15 @@ public class RhythmItemsController : MonoBehaviour
             int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
             Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
             
-            Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
+            var gameObject = Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
+            var rhythmItemController = gameObject.GetComponent<RhythmItemController>();
+            
+            bool isFakeItem = Random.Range(0, _catRhythmItemProbability) == 3;
+            
+            if (isFakeItem)
+            {
+                rhythmItemController.SetFakeCat();
+            }
         }
 
     }
