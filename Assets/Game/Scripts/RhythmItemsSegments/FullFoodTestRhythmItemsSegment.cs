@@ -3,6 +3,13 @@ namespace Game.Scripts.RhythmItemsSegments
     public class FullFoodTestRhythmItemsSegment : RhythmItemsSegment
     {
         private int _lines = 10;
+
+        private SpeedType _speedType;
+        
+        public FullFoodTestRhythmItemsSegment(SpeedType speedType)
+        {
+            _speedType = speedType;
+        }
         
         public bool HasNextItem()
         {
@@ -17,7 +24,7 @@ namespace Game.Scripts.RhythmItemsSegments
 
         public SpeedType GetSpeedType()
         {
-            return SpeedType.FAST;
+            return _speedType;
         }
 
         public float GetSpawnTime()

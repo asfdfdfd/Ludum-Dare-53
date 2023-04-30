@@ -988,7 +988,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8d08f88114b9d4b09a3d70f09eab708e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 041ff01995575408f90554effec33ac1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.265
   m_Pitch: 1
@@ -1715,6 +1715,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607085641}
+  - component: {fileID: 607085642}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -1739,6 +1740,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &607085642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607085640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1b40030f3084252870f7313e533cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClipTrack100Music: {fileID: 8300000, guid: 041ff01995575408f90554effec33ac1,
+    type: 3}
+  _audioClipTrack100Rhythm: {fileID: 8300000, guid: ce251db4d268d485bbefdd7e209f90b7,
+    type: 3}
+  _audioClipTrack120Music: {fileID: 8300000, guid: 47f3ff7f985c04e1eba069d12731e46a,
+    type: 3}
+  _audioClipTrack120Rhythm: {fileID: 8300000, guid: 30e6b89d450f049fbb9210c394ad57c3,
+    type: 3}
+  _audioClipTrack140Music: {fileID: 8300000, guid: e141fd7c8b8b242858e62f11812befaf,
+    type: 3}
+  _audioClipTrack140Rhythm: {fileID: 8300000, guid: 1ee017b487e464fcba88506e6d12bc4f,
+    type: 3}
+  _audioClipTransiion100To120Music: {fileID: 8300000, guid: 4e7fe2ba5c4b342a79af2dc0cf18f634,
+    type: 3}
+  _audioClipTransiion120To100Music: {fileID: 8300000, guid: eadd1140f2ca1406a8172b6558c714b4,
+    type: 3}
+  _audioClipTransiion120To140Music: {fileID: 8300000, guid: 97c5bdb15ff094d70b0d9c2344ed7fc9,
+    type: 3}
+  _audioClipTransiion140To120Music: {fileID: 8300000, guid: 4220e688a0a5a496ea671c5dfc23ee53,
+    type: 3}
+  _audioSourceMusic: {fileID: 247504216}
+  _audioSourceRhythm: {fileID: 1289251542}
 --- !u!1 &613891996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,8 +1837,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _birdController: {fileID: 896720815}
-  _rhythmItemsController: {fileID: 774804831}
-  _levelLengthInSeconds: 60
 --- !u!4 &774804830
 Transform:
   m_ObjectHideFlags: 0
@@ -1837,6 +1870,8 @@ MonoBehaviour:
   _prefabShitRhythmItem: {fileID: 8241071494274918638, guid: 82c375fd710bc4f5c99949452bb9ca81,
     type: 3}
   _prefabEndLevel: {fileID: 6399349500865709337, guid: 0134e10bff79f4024ad79b9d1cfca519,
+    type: 3}
+  _prefabStartSegment: {fileID: 6399349500865709337, guid: 3d3cc66e628154a60a903aa3b8229da6,
     type: 3}
   _rhythmItemSpawnPoints:
   - {fileID: 1631864103}
@@ -2530,7 +2565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24ffd8cb0c254b5b95fd6768e276063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSourceRhythm: {fileID: 1289251542}
+  _musicPlayer: {fileID: 607085642}
   _silenceTime: 1
   _fadeDuration: 0.1
 --- !u!1 &1080068474
@@ -2972,7 +3007,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6c5e7e1a9d72e4da5a7120406a62e416, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ce251db4d268d485bbefdd7e209f90b7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.265
   m_Pitch: 1
@@ -3571,7 +3606,7 @@ PrefabInstance:
     - target: {fileID: 1958256890405433161, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
       propertyPath: m_Name
-      value: BirdPrefab
+      value: Bird
       objectReference: {fileID: 0}
     - target: {fileID: 5029919633861741344, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
@@ -3643,6 +3678,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: _musicPlayer
+      value: 
+      objectReference: {fileID: 607085642}
     - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
       propertyPath: _prefabPopUpText

@@ -11,19 +11,23 @@ public class RhythmItemsController : MonoBehaviour
     [SerializeField] private GameObject _prefabRhythmItem;
     [SerializeField] private GameObject _prefabShitRhythmItem;
     [SerializeField] private GameObject _prefabEndLevel;
+    [SerializeField] private GameObject _prefabStartSegment;
     
     [SerializeField] private List<GameObject> _rhythmItemSpawnPoints;
 
     [SerializeField] private int _shitRhythmItemProbability = 10;
     [SerializeField] private int _catRhythmItemProbability = 10;
 
-    private float _spawnTimer = 0.0f;
-    
     private bool _shouldSpawnItems = true;
+
+    private float _previousSpawnTravelledLength = 0.0f;
 
     private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
     {
-        new FullFoodTestRhythmItemsSegment(), 
+        new SlowRandomFoodOnly(),
+        new BabkaCrissCross(),
+        new SlowRandomFoodOnly(),
+        new BabkaLovushkaDjockera(),
         new EndLevelRhythmItemsSegment()
     };
 
@@ -37,18 +41,10 @@ public class RhythmItemsController : MonoBehaviour
         {
             var segment = _segments[_currentSegmentIndex];
 
-            switch (segment.GetSpeedType())
-            {
-                case SpeedType.SLOW:
-                    GlobalGameplaySettingsComponent.Instance.SetSlowSpeed();
-                    break;
-                case SpeedType.NORMAL:
-                    GlobalGameplaySettingsComponent.Instance.SetNormalSpeed();
-                    break;
-                case SpeedType.FAST:
-                    GlobalGameplaySettingsComponent.Instance.SetFastSpeed();
-                    break;
-            }
+            SpawnStartSegment(0, segment);
+            SpawnStartSegment(1, segment);
+            SpawnStartSegment(2, segment);
+            SpawnStartSegment(3, segment);
         }
     }
     
@@ -57,19 +53,17 @@ public class RhythmItemsController : MonoBehaviour
         ActivateNextSegment();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_currentSegmentIndex < _segments.Length)
         {
-            _spawnTimer += Time.deltaTime;
-            
-            var segment = _segments[_currentSegmentIndex];
-            
-            if (_spawnTimer >= segment.GetSpawnTime())
-            {
-                _spawnTimer = 0.0f;
+            _previousSpawnTravelledLength += GlobalGameplaySettingsComponent.Instance.DownSpeed * Time.fixedDeltaTime;
 
+            if (_previousSpawnTravelledLength >= 30.0f)
+            {
                 SpawnRhythmItem();
+                
+                _previousSpawnTravelledLength = 0.0f;
             }
         }
     }
@@ -82,7 +76,7 @@ public class RhythmItemsController : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            switch (rhythmData.type[i])
+            switch (rhythmData.typesOnLanes[i])
             {
                 case RhythmItemType.NOTHING:
                     // Empty place.
@@ -131,6 +125,13 @@ public class RhythmItemsController : MonoBehaviour
         //         rhythmItemController.SetFakeCat();
         //     }
         // }
+    }
+
+    private void SpawnStartSegment(int spawnPointIndex, RhythmItemsSegment segment)
+    {
+        var gameObjectSegment = Instantiate(_prefabStartSegment, _rhythmItemSpawnPoints[spawnPointIndex].transform.position, Quaternion.identity);
+        var startSegmentController = gameObjectSegment.GetComponent<StartSegmentRhytmItemController>();
+        startSegmentController.SetSegment(segment);        
     }
 
     private void SpawnFood(int spawnPointIndex)
