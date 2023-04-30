@@ -49,6 +49,8 @@ MonoBehaviour:
   _lanes: []
   _rhythmItemPickupAudioSource: {fileID: 0}
   _shitRhythmItemPickupAudioSource: {fileID: 0}
+  _prefabPopUpText: {fileID: 3086989571102593421, guid: 903ef214331ed4c0eb4f0cded45213df,
+    type: 3}
   levelEndEvent:
     m_PersistentCalls:
       m_Calls: []

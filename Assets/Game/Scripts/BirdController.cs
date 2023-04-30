@@ -13,35 +13,55 @@ public class BirdController : MonoBehaviour
     [FormerlySerializedAs("_rhythmItemPickupSound")] [SerializeField] private AudioSource _rhythmItemPickupAudioSource;
     [SerializeField] private AudioSource _shitRhythmItemPickupAudioSource;
 
+    [SerializeField] private GameObject _prefabPopUpText;
+    
     public UnityEvent levelEndEvent;
+
+    private int _currentLaneIndex = -1;
     
     public void MoveToStartupLane()
     {
         MoveToLane(2);
     }
 
-    public void MoveToLane(int index)
+    private void MoveToLane(int index)
     {
+        _currentLaneIndex = index;
+        
         transform.position = _lanes[index].transform.position;
+    }
+
+    private void MoveLeft()
+    {
+        _currentLaneIndex--;
+        if (_currentLaneIndex < 0)
+        {
+            _currentLaneIndex = 0;
+        }
+        
+        MoveToLane(_currentLaneIndex);
+    }
+
+    private void MoveRight()
+    {
+        _currentLaneIndex++;
+        if (_currentLaneIndex == _lanes.Count)
+        {
+            _currentLaneIndex = _lanes.Count - 1;
+        }
+        
+        MoveToLane(_currentLaneIndex);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveToLane(0);
+            MoveLeft();
         } 
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MoveToLane(1);
-        }  
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            MoveToLane(2);
-        } 
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            MoveToLane(3);
+            MoveRight();
         }
     }
     
@@ -52,6 +72,10 @@ public class BirdController : MonoBehaviour
         RhythmItemController rhythmItemController = otherGameObject.GetComponent<RhythmItemController>();
         if (rhythmItemController != null)
         {
+            GameObject gameObjectText = Instantiate(_prefabPopUpText, otherGameObject.transform.position, _prefabPopUpText.transform.rotation);
+            PopUpTextController controller = gameObjectText.GetComponent<PopUpTextController>();
+            controller.SetText(String.Format("+{0}", GlobalGameplaySettingsComponent.Instance.PointsPerOneRhythmItem));
+            
             GameState.PointsCollected += GlobalGameplaySettingsComponent.Instance.PointsPerOneRhythmItem;
             if (GameState.PointsCollected > GlobalGameplaySettingsComponent.Instance.PointsPerLevel)
             {
@@ -65,7 +89,11 @@ public class BirdController : MonoBehaviour
         ShitRhythmItemController shitRhythmItemController = otherGameObject.GetComponent<ShitRhythmItemController>();
         if (shitRhythmItemController != null)
         {
-            GameState.PointsCollected -= GlobalGameplaySettingsComponent.Instance.PointsPerOneRhythmItem;
+            GameObject gameObjectText = Instantiate(_prefabPopUpText, otherGameObject.transform.position, _prefabPopUpText.transform.rotation);
+            PopUpTextController controller = gameObjectText.GetComponent<PopUpTextController>();
+            controller.SetText(String.Format("-{0}", GlobalGameplaySettingsComponent.Instance.PointsPerOneShitItem));
+            
+            GameState.PointsCollected -= GlobalGameplaySettingsComponent.Instance.PointsPerOneShitItem;
             if (GameState.PointsCollected <= 0)
             {
                 GameState.PointsCollected = 0;
