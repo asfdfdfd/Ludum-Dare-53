@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/DeathFromCatScene.unity
     guid: 12e371baf903143dab2a09678317bec3
+  - enabled: 1
+    path: Assets/Game/Scenes/ShitScene.unity
+    guid: da44c0dbd12e44a82b1d255899a2cb03
   m_configObjects: {}

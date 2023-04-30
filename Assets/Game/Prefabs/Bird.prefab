@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5024155480333850795}
   - component: {fileID: 3122332607742075766}
   m_Layer: 6
-  m_Name: BirdPrefab
+  m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
