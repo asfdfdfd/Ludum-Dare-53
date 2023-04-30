@@ -46,7 +46,10 @@ public class RhythmItemsController : MonoBehaviour
         {
             _shouldSpawnItems = false;
             
+            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[0].transform.position, Quaternion.identity);
             Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[1].transform.position, Quaternion.identity);
+            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[2].transform.position, Quaternion.identity);
+            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[3].transform.position, Quaternion.identity);
             
             return;
         }

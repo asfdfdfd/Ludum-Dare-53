@@ -1803,9 +1803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _birdController: {fileID: 896720815}
   _rhythmItemsController: {fileID: 774804831}
-  _levelLengthInSeconds: 666
-  _endTreePrefab: {fileID: 0}
-  _endTreeSpawnPoint: {fileID: 0}
+  _levelLengthInSeconds: 60
 --- !u!4 &774804830
 Transform:
   m_ObjectHideFlags: 0
@@ -1838,7 +1836,8 @@ MonoBehaviour:
     type: 3}
   _prefabShitRhythmItem: {fileID: 8241071494274918638, guid: 82c375fd710bc4f5c99949452bb9ca81,
     type: 3}
-  _prefabEndLevel: {fileID: 0}
+  _prefabEndLevel: {fileID: 6399349500865709337, guid: 0134e10bff79f4024ad79b9d1cfca519,
+    type: 3}
   _rhythmItemSpawnPoints:
   - {fileID: 1631864103}
   - {fileID: 99849739}
