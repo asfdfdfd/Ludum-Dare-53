@@ -7,13 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameplaySceneController : MonoBehaviour
 {
     [SerializeField] private BirdController _birdController;
-
-    [SerializeField] private RhythmItemsController _rhythmItemsController;
-    
-    [SerializeField] private float _levelLengthInSeconds = 10.0f;
-
-    private bool _isLevelEndTimerEnabled = true;
-    private float _levelEndTimer = 0.0f;
     
     private void Start()
     {
@@ -25,14 +18,5 @@ public class GameplaySceneController : MonoBehaviour
             
             SceneManager.LoadScene("ShitScene");
         });
-
-        StartCoroutine(AwaitLevelEnd());
-    }
-
-    private IEnumerator AwaitLevelEnd()
-    {
-        yield return new WaitForSeconds(_levelLengthInSeconds);
-        
-        _rhythmItemsController.EndLevel();
     }
 }

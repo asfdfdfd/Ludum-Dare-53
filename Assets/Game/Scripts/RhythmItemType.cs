@@ -2,6 +2,6 @@ namespace Game.Scripts
 {
     public enum RhythmItemType
     {
-        FOOD, FAKE, GRANDMA, LEVELEND
+        NOTHING, FOOD, FAKE, GRANDMA, LEVELEND
     }
 }

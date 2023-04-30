@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
+using Game.Scripts.RhythmItemsSegments;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,73 +17,149 @@ public class RhythmItemsController : MonoBehaviour
     [SerializeField] private int _shitRhythmItemProbability = 10;
     [SerializeField] private int _catRhythmItemProbability = 10;
 
-    private float _spawnTime = 1.0f;
-    
     private float _spawnTimer = 0.0f;
-
-    private bool _shouldEndLevel = false;
-
-    private bool _shouldSpawnItems = true;
     
+    private bool _shouldSpawnItems = true;
+
+    private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
+    {
+        new FullFoodTestRhythmItemsSegment(), 
+        new EndLevelRhythmItemsSegment()
+    };
+
+    private int _currentSegmentIndex = -1;
+
+    private void ActivateNextSegment()
+    {
+        _currentSegmentIndex++;
+
+        if (_currentSegmentIndex < _segments.Length)
+        {
+            var segment = _segments[_currentSegmentIndex];
+
+            switch (segment.GetSpeedType())
+            {
+                case SpeedType.SLOW:
+                    GlobalGameplaySettingsComponent.Instance.SetSlowSpeed();
+                    break;
+                case SpeedType.NORMAL:
+                    GlobalGameplaySettingsComponent.Instance.SetNormalSpeed();
+                    break;
+                case SpeedType.FAST:
+                    GlobalGameplaySettingsComponent.Instance.SetFastSpeed();
+                    break;
+            }
+        }
+    }
+    
+    private void Start()
+    {
+        ActivateNextSegment();
+    }
+
     private void Update()
     {
-        _spawnTimer += Time.deltaTime;
-
-        if (_spawnTimer >= _spawnTime)
+        if (_currentSegmentIndex < _segments.Length)
         {
-            _spawnTimer = 0.0f;
+            _spawnTimer += Time.deltaTime;
             
-            SpawnRhythmItem();
+            var segment = _segments[_currentSegmentIndex];
+            
+            if (_spawnTimer >= segment.GetSpawnTime())
+            {
+                _spawnTimer = 0.0f;
+
+                SpawnRhythmItem();
+            }
         }
     }
 
     private void SpawnRhythmItem()
     {
-        if (!_shouldSpawnItems)
+        var segment = _segments[_currentSegmentIndex];
+
+        var rhythmData = segment.GetNextItem();
+
+        for (int i = 0; i < 4; i++)
         {
-            return;
-        }
-        
-        if (_shouldEndLevel)
-        {
-            _shouldSpawnItems = false;
-            
-            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[0].transform.position, Quaternion.identity);
-            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[1].transform.position, Quaternion.identity);
-            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[2].transform.position, Quaternion.identity);
-            Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[3].transform.position, Quaternion.identity);
-            
-            return;
-        }
-        
-        bool shouldDisplayShitItem = Random.Range(0, _shitRhythmItemProbability) == 9;
-        
-        if (shouldDisplayShitItem)
-        {
-            int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
-            Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
-        
-            Instantiate(_prefabShitRhythmItem, spawnPointPosition, _prefabShitRhythmItem.transform.rotation);
-        } 
-        else
-        {
-            int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
-            Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
-            
-            var gameObject = Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
-            var rhythmItemController = gameObject.GetComponent<RhythmItemController>();
-            
-            bool isFakeItem = Random.Range(0, _catRhythmItemProbability) == 3;
-            
-            if (isFakeItem)
+            switch (rhythmData.type[i])
             {
-                rhythmItemController.SetFakeCat();
+                case RhythmItemType.NOTHING:
+                    // Empty place.
+                    break;
+                case RhythmItemType.FOOD:
+                    SpawnFood(i);
+                    break;
+                case RhythmItemType.FAKE:
+                    SpawnFake(i);
+                    break;
+                case RhythmItemType.GRANDMA:
+                    SpawnGrandma(i);
+                    break;
+                case RhythmItemType.LEVELEND:
+                    SpawnLevelEnd(i);
+                    break;
             }
         }
+
+        if (!segment.HasNextItem())
+        {
+            ActivateNextSegment();
+        }
+
+        // bool shouldDisplayShitItem = Random.Range(0, _shitRhythmItemProbability) == 9;
+        //
+        // if (shouldDisplayShitItem)
+        // {
+        //     int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
+        //     Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+        //
+        //     Instantiate(_prefabShitRhythmItem, spawnPointPosition, _prefabShitRhythmItem.transform.rotation);
+        // } 
+        // else
+        // {
+        //     int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
+        //     Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+        //     
+        //     var gameObject = Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
+        //     var rhythmItemController = gameObject.GetComponent<RhythmItemController>();
+        //     
+        //     bool isFakeItem = Random.Range(0, _catRhythmItemProbability) == 3;
+        //     
+        //     if (isFakeItem)
+        //     {
+        //         rhythmItemController.SetFakeCat();
+        //     }
+        // }
     }
 
-    public void EndLevel()
+    private void SpawnFood(int spawnPointIndex)
     {
-        _shouldEndLevel = true;
+        Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+                    
+        var gameObject = Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
+        var rhythmItemController = gameObject.GetComponent<RhythmItemController>();
+    }
+
+    private void SpawnFake(int spawnPointIndex)
+    {
+        Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+                    
+        var gameObject = Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
+        var rhythmItemController = gameObject.GetComponent<RhythmItemController>();
+        
+        rhythmItemController.SetFakeCat();        
+    }
+
+    private void SpawnGrandma(int spawnPointIndex)
+    {
+        Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
+                    
+        Instantiate(_prefabShitRhythmItem, spawnPointPosition, _prefabShitRhythmItem.transform.rotation); 
+    }
+
+    private void SpawnLevelEnd(int spawnPointIndex)
+    {
+        Instantiate(_prefabEndLevel, _rhythmItemSpawnPoints[spawnPointIndex].transform.position, Quaternion.identity);
     }
 }
