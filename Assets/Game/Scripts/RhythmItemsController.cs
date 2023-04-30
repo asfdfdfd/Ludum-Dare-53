@@ -78,7 +78,6 @@ public class RhythmItemsController : MonoBehaviour
                 rhythmItemController.SetFakeCat();
             }
         }
-
     }
 
     public void EndLevel()
