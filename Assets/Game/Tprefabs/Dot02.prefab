@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3788383925620990883}
   - component: {fileID: 233290591327185926}
   - component: {fileID: 2654915717655140556}
+  - component: {fileID: 316478321469605400}
   m_Layer: 0
-  m_Name: Dot
+  m_Name: Dot02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &316478321469605400
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600668599823120665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: c90d53512251ddf4abfd1829e72eb4d7, type: 3}

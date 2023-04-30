@@ -19,6 +19,8 @@ public class RhythmLostPlaneController : MonoBehaviour
     private float _silenceTimer = 0.0f;
     private void OnCollisionEnter(Collision other)
     {
+        return;
+        
         RhythmItemController rhythmItemController = other.gameObject.GetComponent<RhythmItemController>();
         if (rhythmItemController != null)
         {

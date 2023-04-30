@@ -57,14 +57,14 @@ public class RhythmItemsController : MonoBehaviour
             int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
             Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
         
-            Instantiate(_prefabShitRhythmItem, spawnPointPosition, Quaternion.identity);
+            Instantiate(_prefabShitRhythmItem, spawnPointPosition, _prefabShitRhythmItem.transform.rotation);
         } 
         else
         {
             int spawnPointIndex = Random.Range(0, _rhythmItemSpawnPoints.Count);
             Vector3 spawnPointPosition = _rhythmItemSpawnPoints[spawnPointIndex].transform.position;
-        
-            Instantiate(_prefabRhythmItem, spawnPointPosition, Quaternion.identity);
+            
+            Instantiate(_prefabRhythmItem, spawnPointPosition, _prefabRhythmItem.transform.rotation);
         }
 
     }
