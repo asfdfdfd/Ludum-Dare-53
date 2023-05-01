@@ -46,6 +46,11 @@ public class GameplaySceneAllIScreensDisplayer : MonoBehaviour
 
     private void Update()
     {
+        if (GameState.ShouldStartGameplayRightNow)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _audioSourceSpace.Play();
