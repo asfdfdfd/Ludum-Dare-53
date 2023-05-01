@@ -9855,6 +9855,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bird
       objectReference: {fileID: 0}
+    - target: {fileID: 4754020106063163367, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754020106063163367, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754020106063163367, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5029919633861741344, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -9869,6 +9884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 297.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382501624281691485, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5387826329174060451, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
@@ -9923,6 +9943,11 @@ PrefabInstance:
     - target: {fileID: 5387826329174060451, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658225295470612890, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
