@@ -8,7 +8,7 @@ public class GameState
     public static float TreeSizeCurrent;
     public static float TreeSizeBest;
 
-    public static bool ShouldStartGameplayRightNow = Application.isEditor;
+    public static bool ShouldStartGameplayRightNow = false;//Application.isEditor;
     
     public static System.Random Random = new(Environment.TickCount);
     
