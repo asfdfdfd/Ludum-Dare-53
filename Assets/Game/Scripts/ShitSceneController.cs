@@ -37,12 +37,27 @@ public class ShitSceneController : MonoBehaviour
         _bird.transform.DOMove(birdieEndPosition, 10.0f).SetSpeedBased(true).SetEase(Ease.Linear);
 
         var gameObjectShit = Instantiate(_shitPrefab, _bird.transform.position, Quaternion.identity);
-
+        
+        var scaleFactorPoop = GameState.TreeSizeCurrent;
+        if (scaleFactorPoop <= 0.4f)
+        {
+            scaleFactorPoop = 0.4f;
+        }
+        
+        gameObjectShit.transform.localScale *= scaleFactorPoop;
+        
         gameObjectShit.transform.DOMove(_shitEndPosition.transform.position, 5.0f).SetEase(Ease.Linear).OnComplete(
             () =>
             {
                 _finalTree.SetActive(true);
-                var endScale = _finalTree.transform.localScale * GameState.TreeSizeCurrent;
+  
+                var scaleFactor = GameState.TreeSizeCurrent;
+                if (scaleFactor <= 0.1f)
+                {
+                    scaleFactor = 0.1f;
+                }
+                
+                var endScale = _finalTree.transform.localScale * scaleFactor;
                 _finalTree.transform.localScale = Vector3.zero;
                 _finalTree.transform.DOScale(endScale, 1.0f).SetEase(Ease.OutBounce);
             });
@@ -74,6 +89,8 @@ public class ShitSceneController : MonoBehaviour
             
             _faderImage.DOFade(1.0f, 1.0f).OnComplete(() =>
             {
+                GameState.ResetData();
+                
                 SceneManager.LoadScene("GameplayScene2");
             });
         }
