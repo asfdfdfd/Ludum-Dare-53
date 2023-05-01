@@ -19,18 +19,18 @@ public class RhythmLostPlaneController : MonoBehaviour
     private float _silenceTimer = 0.0f;
     private void OnCollisionEnter(Collision other)
     {
-        return;
-        
-        // RhythmItemController rhythmItemController = other.gameObject.GetComponent<RhythmItemController>();
-        // if (rhythmItemController != null)
-        // {
-        //     _silenceTimer = 0.0f;
-        //     if (!_isSilencingOn)
-        //     {
-        //         _isSilencingOn = true;
-        //         StartCoroutine(SilenceCoroutine());
-        //     }
-        // }
+        RhythmItemController rhythmItemController = other.gameObject.GetComponent<RhythmItemController>();
+        if (rhythmItemController != null)
+        {
+            _musicPlayer.PlayRhythmLostSound();
+            
+            // _silenceTimer = 0.0f;
+            // if (!_isSilencingOn)
+            // {
+            //     _isSilencingOn = true;
+            //     StartCoroutine(SilenceCoroutine());
+            // }            
+        }
     }
 
     // private IEnumerator SilenceCoroutine()

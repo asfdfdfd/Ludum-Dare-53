@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,5 +18,13 @@ public class MoveDownComponent : MonoBehaviour
         position.z -= GlobalGameplaySettingsComponent.Instance.DownSpeed * Time.fixedDeltaTime;
         
         _rigidbody.MovePosition(position);
+    }
+
+    private void Update()
+    {
+        if (transform.position.z < -500)
+        {
+            Destroy(gameObject);
+        }
     }
 }

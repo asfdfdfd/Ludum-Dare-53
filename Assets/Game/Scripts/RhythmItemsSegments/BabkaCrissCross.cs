@@ -7,6 +7,13 @@ namespace Game.Scripts.RhythmItemsSegments
         private int _lines = 10;
 
         private bool _isCriss = false;
+
+        private SpeedType _speedType;
+        
+        public BabkaCrissCross(SpeedType speedType)
+        {
+            _speedType = speedType;
+        }
         
         public bool HasNextItem()
         {
@@ -31,12 +38,7 @@ namespace Game.Scripts.RhythmItemsSegments
 
         public SpeedType GetSpeedType()
         {
-            return SpeedType.NORMAL;
-        }
-
-        public float GetSpawnTime()
-        {
-            return 1.0f;
+            return _speedType;
         }
     }
 }

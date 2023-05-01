@@ -13,5 +13,22 @@ namespace Game.Scripts
         {
             typesOnLanes = typesOnLanesIn;
         }
+
+        public RhythmItemData(RhythmItemType item, int laneIndex)
+        {
+            typesOnLanes = new RhythmItemType[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == laneIndex)
+                {
+                    typesOnLanes[i] = item;
+                }
+                else
+                {
+                    typesOnLanes[i] = RhythmItemType.NOTHING;
+                }
+            }
+        }
     }
 }

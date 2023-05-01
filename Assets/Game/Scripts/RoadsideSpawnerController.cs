@@ -25,7 +25,7 @@ public class RoadsideSpawnerController : MonoBehaviour
             yield return new WaitForSeconds(spawnPauseSeconds);
 
             int prefabIndex = Random.Range(0, _prefabs.Count);
-
+            
             Instantiate(_prefabs[prefabIndex], transform.position, Quaternion.identity);
         }
     }

@@ -37,10 +37,5 @@ namespace Game.Scripts.RhythmItemsSegments
         {
             return SpeedType.SLOW;
         }
-
-        public float GetSpawnTime()
-        {
-            return 1.0f;
-        }
     }
 }

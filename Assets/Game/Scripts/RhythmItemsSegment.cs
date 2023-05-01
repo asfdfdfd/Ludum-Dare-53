@@ -10,6 +10,4 @@ public interface RhythmItemsSegment
     RhythmItemData GetNextItem();
 
     SpeedType GetSpeedType();
-
-    float GetSpawnTime();
 }

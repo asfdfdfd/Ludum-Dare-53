@@ -22,6 +22,8 @@ public class ShitSceneController : MonoBehaviour
     [SerializeField] private GameObject _endResultPanelPrefab;
 
     [SerializeField] private GameObject _canvas;
+
+    [SerializeField] private AudioSource _audioSourceSpace;
     
     private bool _allowToSkip = false;
     
@@ -66,6 +68,8 @@ public class ShitSceneController : MonoBehaviour
     {
         if (_allowToSkip && Input.GetKeyDown(KeyCode.Space))
         {
+            _audioSourceSpace.Play();
+            
             _allowToSkip = false;
             
             _faderImage.DOFade(1.0f, 1.0f).OnComplete(() =>

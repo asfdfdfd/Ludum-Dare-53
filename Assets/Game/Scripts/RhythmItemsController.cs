@@ -12,11 +12,13 @@ public class RhythmItemsController : MonoBehaviour
     [SerializeField] private GameObject _prefabShitRhythmItem;
     [SerializeField] private GameObject _prefabEndLevel;
     [SerializeField] private GameObject _prefabStartSegment;
+
+    [SerializeField] private float _normalLengthBetweenItems;
     
     [SerializeField] private List<GameObject> _rhythmItemSpawnPoints;
 
-    [SerializeField] private int _shitRhythmItemProbability = 10;
-    [SerializeField] private int _catRhythmItemProbability = 10;
+    // [SerializeField] private int _shitRhythmItemProbability = 10;
+    // [SerializeField] private int _catRhythmItemProbability = 10;
 
     private bool _shouldSpawnItems = true;
 
@@ -24,10 +26,30 @@ public class RhythmItemsController : MonoBehaviour
 
     private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
     {
-        new SlowRandomFoodOnly(),
-        new BabkaCrissCross(),
-        new SlowRandomFoodOnly(),
-        new BabkaLovushkaDjockera(),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),
+        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        // new BabkaCrissCross(SpeedType.NORMAL),        
+        new BabkaLovushkaDjockera(SpeedType.FAST),
+        new BabkaLovushkaDjockera(SpeedType.FAST),
+        new BabkaLovushkaDjockera(SpeedType.FAST),
+        new BabkaLovushkaDjockera(SpeedType.FAST),
+        //new BabkaCrissCross(SpeedType.FAST),
+        new BabkaLovushkaDjockera(SpeedType.FAST),
         new EndLevelRhythmItemsSegment()
     };
 
@@ -51,6 +73,8 @@ public class RhythmItemsController : MonoBehaviour
     private void Start()
     {
         ActivateNextSegment();
+
+        _normalLengthBetweenItems = GlobalGameplaySettingsComponent.Instance.GetNormalSpeed() * 0.5f;
     }
 
     private void FixedUpdate()
@@ -59,7 +83,7 @@ public class RhythmItemsController : MonoBehaviour
         {
             _previousSpawnTravelledLength += GlobalGameplaySettingsComponent.Instance.DownSpeed * Time.fixedDeltaTime;
 
-            if (_previousSpawnTravelledLength >= 30.0f)
+            if (_previousSpawnTravelledLength >= _normalLengthBetweenItems)
             {
                 SpawnRhythmItem();
                 
