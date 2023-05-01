@@ -9952,6 +9952,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
+      propertyPath: _prefabPook
+      value: 
+      objectReference: {fileID: 4459630473505801468, guid: ed9cf57c8519c4cf696ae3a4df04a270,
+        type: 3}
+    - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
       propertyPath: _musicPlayer
       value: 
       objectReference: {fileID: 607085642}
@@ -9966,6 +9972,12 @@ PrefabInstance:
       propertyPath: _lanes.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
+        type: 3}
+      propertyPath: _prefabBabkaSrenk
+      value: 
+      objectReference: {fileID: 1032840486919139949, guid: d2f57b664616d40e08e40e1520837522,
+        type: 3}
     - target: {fileID: 8215335139393169784, guid: 4000bbe49f7bc48b6a87e8466332aa51,
         type: 3}
       propertyPath: _srenkInTheMiddle

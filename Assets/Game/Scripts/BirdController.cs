@@ -23,6 +23,9 @@ public class BirdController : MonoBehaviour
 
     [SerializeField] private GameObject _srenkInTheMiddle;
     [SerializeField] private Image _srenkInTheMiddleImage;
+
+    [SerializeField] private GameObject _prefabPook;
+    [SerializeField] private GameObject _prefabBabkaSrenk;
     
     public UnityEvent levelEndEvent;
 
@@ -102,6 +105,8 @@ public class BirdController : MonoBehaviour
             
             _rhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
+            
+            Instantiate(_prefabPook, gameObject.transform.position, _prefabPook.transform.rotation);
 
             return;
         }
@@ -124,6 +129,8 @@ public class BirdController : MonoBehaviour
 
             StartCoroutine(ShowSrenk());
 
+            Instantiate(_prefabBabkaSrenk, gameObject.transform.position, _prefabBabkaSrenk.transform.rotation);
+            
             return;
         }
 
