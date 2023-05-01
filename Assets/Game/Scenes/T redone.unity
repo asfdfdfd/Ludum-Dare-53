@@ -5407,13 +5407,12 @@ MonoBehaviour:
   _prefabEndLevel: {fileID: 6399349500865709337, guid: 0134e10bff79f4024ad79b9d1cfca519,
     type: 3}
   _prefabStartSegment: {fileID: 0}
+  _normalLengthBetweenItems: 0
   _rhythmItemSpawnPoints:
   - {fileID: 1631864103}
   - {fileID: 99849739}
   - {fileID: 613891996}
   - {fileID: 1955379004}
-  _shitRhythmItemProbability: 10
-  _catRhythmItemProbability: 10
 --- !u!114 &774804832
 MonoBehaviour:
   m_ObjectHideFlags: 0
