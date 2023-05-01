@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,8 @@ public class BirdController : MonoBehaviour
     [SerializeField] private AudioSource _shitRhythmItemPickupAudioSource;
 
     [SerializeField] private GameObject _prefabPopUpText;
+
+    [SerializeField] private MusicPlayerComponent _musicPlayer;
     
     public UnityEvent levelEndEvent;
 
@@ -35,6 +38,7 @@ public class BirdController : MonoBehaviour
     private void MoveLeft()
     {
         _currentLaneIndex--;
+        
         if (_currentLaneIndex < 0)
         {
             _currentLaneIndex = 0;
@@ -46,6 +50,7 @@ public class BirdController : MonoBehaviour
     private void MoveRight()
     {
         _currentLaneIndex++;
+        
         if (_currentLaneIndex == _lanes.Count)
         {
             _currentLaneIndex = _lanes.Count - 1;
@@ -122,6 +127,31 @@ public class BirdController : MonoBehaviour
             levelEndEvent?.Invoke();
 
             return;
-        }        
+        }       
+        
+        StartSegmentRhytmItemController startSegmentRhytmItemController = otherGameObject.GetComponent<StartSegmentRhytmItemController>();
+        if (startSegmentRhytmItemController != null)
+        {
+            var segment = startSegmentRhytmItemController.Segment;
+            
+            switch (segment.GetSpeedType())
+            {
+                case SpeedType.SLOW:
+                    GlobalGameplaySettingsComponent.Instance.SetSlowSpeed();
+                    break;
+                case SpeedType.NORMAL:
+                    GlobalGameplaySettingsComponent.Instance.SetNormalSpeed();
+                    break;
+                case SpeedType.FAST:
+                    GlobalGameplaySettingsComponent.Instance.SetFastSpeed();
+                    break;
+            }
+            
+            _musicPlayer.PlayMusic(segment.GetSpeedType());
+
+            Destroy(otherGameObject);
+            
+            return;
+        }          
     }
 }

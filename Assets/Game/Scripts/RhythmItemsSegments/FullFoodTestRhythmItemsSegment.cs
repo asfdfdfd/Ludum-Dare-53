@@ -2,14 +2,34 @@ namespace Game.Scripts.RhythmItemsSegments
 {
     public class FullFoodTestRhythmItemsSegment : RhythmItemsSegment
     {
+        private int _lines = 10;
+
+        private SpeedType _speedType;
+        
+        public FullFoodTestRhythmItemsSegment(SpeedType speedType)
+        {
+            _speedType = speedType;
+        }
+        
         public bool HasNextItem()
         {
-            return true;
+            return _lines >= 0;
         }
 
         public RhythmItemData GetNextItem()
         {
-            return new RhythmItemData();
+            _lines--;
+            return new RhythmItemData(RhythmItemType.FOOD, RhythmItemType.FOOD, RhythmItemType.FOOD, RhythmItemType.FOOD);
+        }
+
+        public SpeedType GetSpeedType()
+        {
+            return _speedType;
+        }
+
+        public float GetSpawnTime()
+        {
+            return 1.0f;
         }
     }
 }

@@ -8,4 +8,8 @@ public interface RhythmItemsSegment
     bool HasNextItem();
 
     RhythmItemData GetNextItem();
+
+    SpeedType GetSpeedType();
+
+    float GetSpawnTime();
 }
