@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using UnityEngine;
 
 public class GlobalGameplaySettingsComponent : MonoBehaviour
@@ -13,8 +14,10 @@ public class GlobalGameplaySettingsComponent : MonoBehaviour
 
     [SerializeField] private int _pointsPerLevel = 100;
 
-    private float _currentDownSpeed = 0.0f;
+    private float _currentDownSpeed;
 
+    private SpeedType _currentSpeedType;
+    
     public float DownSpeed => _currentDownSpeed;
 
     public int PointsPerOneShitItem => _pointsPerOneShitItem;
@@ -26,23 +29,37 @@ public class GlobalGameplaySettingsComponent : MonoBehaviour
     public static GlobalGameplaySettingsComponent Instance =>
         GameObject.Find("MetaGameObjects").GetComponent<GlobalGameplaySettingsComponent>();
 
-    private void Start()
+    private void Awake()
     {
-        _currentDownSpeed = _baseDownSpeed;
+        SetNormalSpeed();
     }
-    
+
     public void SetSlowSpeed()
     {
-        _currentDownSpeed = _baseDownSpeed / 2.0f;
+        _currentSpeedType = SpeedType.SLOW;
+        _currentDownSpeed = _baseDownSpeed - _baseDownSpeed * 0.2f;
     }    
     
     public void SetNormalSpeed()
     {
+        _currentSpeedType = SpeedType.NORMAL;
         _currentDownSpeed = _baseDownSpeed;
+    }
+
+    public float GetNormalSpeed()
+    {
+        return _baseDownSpeed;
     }
     
     public void SetFastSpeed()
     {
-        _currentDownSpeed = _baseDownSpeed * 2.0f;
-    }    
+        _currentSpeedType = SpeedType.FAST;
+        _currentDownSpeed = (_baseDownSpeed + _baseDownSpeed * 0.2f + _baseDownSpeed * 0.2f + _baseDownSpeed * 0.2f + _baseDownSpeed * 0.2f);
+    }
+
+    public SpeedType GetSpeedType()
+    {
+        return _currentSpeedType;
+    }
+    
 }

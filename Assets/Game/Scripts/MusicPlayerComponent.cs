@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts;
@@ -18,12 +19,19 @@ public class MusicPlayerComponent : MonoBehaviour
     [SerializeField] private AudioClip _audioClipTransiion120To100Music;
     [SerializeField] private AudioClip _audioClipTransiion120To140Music;
     [SerializeField] private AudioClip _audioClipTransiion140To120Music;
-
+    
     [SerializeField] private AudioSource _audioSourceMusic;
     [SerializeField] private AudioSource _audioSourceRhythm;
 
-    private SpeedType _currentSpeedType = SpeedType.SLOW;
+    [SerializeField] private AudioSource _audioSourceRhythmLost;
     
+    private SpeedType _currentSpeedType;
+
+    private void Start()
+    {
+        PlayMusic(GlobalGameplaySettingsComponent.Instance.GetSpeedType());
+    }
+
     public void PlayMusic(SpeedType speedType)
     {
         if (_currentSpeedType != speedType)
@@ -58,5 +66,10 @@ public class MusicPlayerComponent : MonoBehaviour
             _audioSourceMusic.Play();
             _audioSourceRhythm.Play();
         }
+    }
+
+    public void PlayRhythmLostSound()
+    {
+        _audioSourceRhythmLost.Play();
     }
 }
