@@ -26,8 +26,8 @@ public class RhythmItemsController : MonoBehaviour
 
     private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
     {
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
+        new BabkaLovushkaDjockera(SpeedType.NORMAL),
+        new BabkaCrissCross(SpeedType.NORMAL),
         // new BabkaLovushkaDjockera(SpeedType.NORMAL),
         // new BabkaCrissCross(SpeedType.NORMAL),
         // new BabkaLovushkaDjockera(SpeedType.NORMAL),
@@ -44,12 +44,12 @@ public class RhythmItemsController : MonoBehaviour
         // new BabkaCrissCross(SpeedType.NORMAL),
         // new BabkaLovushkaDjockera(SpeedType.NORMAL),
         // new BabkaCrissCross(SpeedType.NORMAL),        
-        new BabkaLovushkaDjockera(SpeedType.FAST),
-        new BabkaLovushkaDjockera(SpeedType.FAST),
-        new BabkaLovushkaDjockera(SpeedType.FAST),
-        new BabkaLovushkaDjockera(SpeedType.FAST),
+        // new BabkaLovushkaDjockera(SpeedType.FAST),
+        // new BabkaLovushkaDjockera(SpeedType.FAST),
+        // new BabkaLovushkaDjockera(SpeedType.FAST),
+        // new BabkaLovushkaDjockera(SpeedType.FAST),
         //new BabkaCrissCross(SpeedType.FAST),
-        new BabkaLovushkaDjockera(SpeedType.FAST),
+        // new BabkaLovushkaDjockera(SpeedType.FAST),
         new EndLevelRhythmItemsSegment()
     };
 

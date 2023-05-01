@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GameState
 {
     public static int PointsCollected;
@@ -5,7 +7,7 @@ public class GameState
     public static float TreeSizeCurrent;
     public static float TreeSizeBest;
 
-    public static bool ShouldStartGameplayRightNow = false;
+    public static bool ShouldStartGameplayRightNow = Application.isEditor;
     
     static public void ResetData()
     {

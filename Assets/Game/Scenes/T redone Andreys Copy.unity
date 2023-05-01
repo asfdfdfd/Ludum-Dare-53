@@ -3203,7 +3203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &423608025
 Animator:
   serializedVersion: 5
@@ -5372,6 +5372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _birdController: {fileID: 896720815}
+  _shitScreamImage: {fileID: 0}
+  _audioSource: {fileID: 0}
 --- !u!4 &774804830
 Transform:
   m_ObjectHideFlags: 0

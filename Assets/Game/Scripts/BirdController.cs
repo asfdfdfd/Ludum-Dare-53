@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Game.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class BirdController : MonoBehaviour
 {
@@ -18,10 +20,15 @@ public class BirdController : MonoBehaviour
     [SerializeField] private GameObject _prefabPopUpText;
 
     [SerializeField] private MusicPlayerComponent _musicPlayer;
+
+    [SerializeField] private GameObject _srenkInTheMiddle;
+    [SerializeField] private Image _srenkInTheMiddleImage;
     
     public UnityEvent levelEndEvent;
 
     private int _currentLaneIndex = -1;
+
+    private bool _isSrenkDisplayed = false;
     
     public void MoveToStartupLane()
     {
@@ -115,6 +122,8 @@ public class BirdController : MonoBehaviour
             _shitRhythmItemPickupAudioSource.Play();
             Destroy(otherGameObject);
 
+            StartCoroutine(ShowSrenk());
+
             return;
         }
 
@@ -159,4 +168,20 @@ public class BirdController : MonoBehaviour
             return;
         }          
     }
+
+    private IEnumerator ShowSrenk()
+    {
+        if (!_isSrenkDisplayed)
+        {
+            _isSrenkDisplayed = true;
+
+            _srenkInTheMiddle.SetActive(true);
+            
+            yield return _srenkInTheMiddleImage.DOFade(1.0f, 0.3f).From(0.0f).WaitForCompletion();
+            yield return new WaitForSeconds(0.3f);
+            yield return _srenkInTheMiddleImage.DOFade(0.0f, 0.3f).From(1.0f).WaitForCompletion();
+
+            _isSrenkDisplayed = false;
+        }
+    } 
 }
