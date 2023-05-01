@@ -4,7 +4,7 @@ namespace Game.Scripts.RhythmItemsSegments
 {
     public class BabkaCrissCross : RhythmItemsSegment
     {
-        private int _lines = 10;
+        private int _lines = 5;
 
         private bool _isCriss = false;
 

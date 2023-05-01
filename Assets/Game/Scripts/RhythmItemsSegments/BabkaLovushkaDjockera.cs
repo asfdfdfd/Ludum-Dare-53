@@ -16,15 +16,13 @@ namespace Game.Scripts.RhythmItemsSegments
         private const int LINES_IN_PACK_FROM = 3;
         private const int LINES_IN_PACK_TO = 5;
         
-        private const int PACKS_COUNT_FROM = 2;
-        private const int PACKS_COUNT_TO = 5;
+        private const int PACKS_COUNT_FROM = 1;
+        private const int PACKS_COUNT_TO = 4;
         
         private bool _hasNextItem = true;
 
         private int _currentPack;
         private int _currentLine;
-
-        private Random _random = new();
         
         private SpeedType _speedType;
 
@@ -32,12 +30,12 @@ namespace Game.Scripts.RhythmItemsSegments
         {
             _speedType = speedType;
             
-            int packsCount = _random.Next(PACKS_COUNT_FROM, PACKS_COUNT_TO);
+            int packsCount = GameState.Random.Next(PACKS_COUNT_FROM, PACKS_COUNT_TO);
 
             for (int i = 0; i < packsCount; i++)
             {
-                int linesInPack = _random.Next(LINES_IN_PACK_FROM, LINES_IN_PACK_TO);
-                int laneIndex = _random.Next(0, 4);
+                int linesInPack = GameState.Random.Next(LINES_IN_PACK_FROM, LINES_IN_PACK_TO);
+                int laneIndex = GameState.Random.Next(0, 4);
 
                 List<RhythmItemType> items = new List<RhythmItemType>();
                 

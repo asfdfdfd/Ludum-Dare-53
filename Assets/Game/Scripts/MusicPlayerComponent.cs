@@ -29,43 +29,48 @@ public class MusicPlayerComponent : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic(GlobalGameplaySettingsComponent.Instance.GetSpeedType());
+        PlayMusicForce(GlobalGameplaySettingsComponent.Instance.GetSpeedType());
     }
 
     public void PlayMusic(SpeedType speedType)
     {
         if (_currentSpeedType != speedType)
         {
-            _currentSpeedType = speedType;
-
-            switch (speedType)
-            {
-                case SpeedType.SLOW:
-                    _audioSourceMusic.clip = _audioClipTrack100Music;
-                    _audioSourceMusic.loop = true;
-
-                    _audioSourceRhythm.clip = _audioClipTrack100Rhythm;
-                    _audioSourceRhythm.loop = true;
-                    break;
-                case SpeedType.NORMAL:
-                    _audioSourceMusic.clip = _audioClipTrack120Music;
-                    _audioSourceMusic.loop = true;
-
-                    _audioSourceRhythm.clip = _audioClipTrack120Rhythm;
-                    _audioSourceRhythm.loop = true;
-                    break;          
-                case SpeedType.FAST:
-                    _audioSourceMusic.clip = _audioClipTrack140Music;
-                    _audioSourceMusic.loop = true;
-
-                    _audioSourceRhythm.clip = _audioClipTrack140Rhythm;
-                    _audioSourceRhythm.loop = true;
-                    break;                
-            }
-            
-            _audioSourceMusic.Play();
-            _audioSourceRhythm.Play();
+            PlayMusicForce(speedType);
         }
+    }
+
+    private void PlayMusicForce(SpeedType speedType)
+    {
+        _currentSpeedType = speedType;
+
+        switch (speedType)
+        {
+            case SpeedType.SLOW:
+                _audioSourceMusic.clip = _audioClipTrack100Music;
+                _audioSourceMusic.loop = true;
+
+                _audioSourceRhythm.clip = _audioClipTrack100Rhythm;
+                _audioSourceRhythm.loop = true;
+                break;
+            case SpeedType.NORMAL:
+                _audioSourceMusic.clip = _audioClipTrack120Music;
+                _audioSourceMusic.loop = true;
+
+                _audioSourceRhythm.clip = _audioClipTrack120Rhythm;
+                _audioSourceRhythm.loop = true;
+                break;          
+            case SpeedType.FAST:
+                _audioSourceMusic.clip = _audioClipTrack140Music;
+                _audioSourceMusic.loop = true;
+
+                _audioSourceRhythm.clip = _audioClipTrack140Rhythm;
+                _audioSourceRhythm.loop = true;
+                break;                
+        }
+            
+        _audioSourceMusic.Play();
+        _audioSourceRhythm.Play();
     }
 
     public void PlayRhythmLostSound()

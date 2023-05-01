@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameState
@@ -8,6 +9,8 @@ public class GameState
     public static float TreeSizeBest;
 
     public static bool ShouldStartGameplayRightNow = Application.isEditor;
+    
+    public static System.Random Random = new(Environment.TickCount);
     
     static public void ResetData()
     {

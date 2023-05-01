@@ -24,54 +24,41 @@ public class RhythmItemsController : MonoBehaviour
 
     private float _previousSpawnTravelledLength = 0.0f;
 
-    private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
-    {
-        new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),
-        // new BabkaLovushkaDjockera(SpeedType.NORMAL),
-        // new BabkaCrissCross(SpeedType.NORMAL),        
-        // new BabkaLovushkaDjockera(SpeedType.FAST),
-        // new BabkaLovushkaDjockera(SpeedType.FAST),
-        // new BabkaLovushkaDjockera(SpeedType.FAST),
-        // new BabkaLovushkaDjockera(SpeedType.FAST),
-        //new BabkaCrissCross(SpeedType.FAST),
-        // new BabkaLovushkaDjockera(SpeedType.FAST),
-        new EndLevelRhythmItemsSegment()
-    };
+    // private RhythmItemsSegment[] _segments = new RhythmItemsSegment[]
+    // {
+    //     new RandomFoodSegment(false, SpeedType.NORMAL),
+    //     new RandomFoodSegment(true, SpeedType.NORMAL),
+    //     new CorridorsOfLife02Segment(SpeedType.NORMAL),
+    //     new BabkaLovushkaDjockera(SpeedType.NORMAL),
+    //     new BabkaCrissCross(SpeedType.NORMAL),
+    //     new CorridorsOfLife01Segment(SpeedType.NORMAL),
+    //     new RandomFoodSegment(true, SpeedType.NORMAL),
+    //     new RandomFoodSegment(false, SpeedType.NORMAL),
+    //     
+    //     new CorridorsOfDeath01Segment(SpeedType.SLOW),
+    //     
+    //     new BabkaCrissCross(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     new CorridorsOfLife02Segment(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     new CorridorsOfLife01Segment(SpeedType.FAST),
+    //     new BabkaCrissCross(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     new BabkaLovushkaDjockera(SpeedType.FAST),
+    //     
+    //     new EndLevelRhythmItemsSegment()
+    // };
 
+    private List<RhythmItemsSegment> _segments = new List<RhythmItemsSegment>();
+    
     private int _currentSegmentIndex = -1;
-
-    private void ActivateNextSegment()
-    {
-        _currentSegmentIndex++;
-
-        if (_currentSegmentIndex < _segments.Length)
-        {
-            var segment = _segments[_currentSegmentIndex];
-
-            SpawnStartSegment(0, segment);
-            SpawnStartSegment(1, segment);
-            SpawnStartSegment(2, segment);
-            SpawnStartSegment(3, segment);
-        }
-    }
     
     private void Start()
     {
+        GenerateSegments();
+        
         if (!GameState.ShouldStartGameplayRightNow)
         {
             return;
@@ -82,6 +69,65 @@ public class RhythmItemsController : MonoBehaviour
         _normalLengthBetweenItems = GlobalGameplaySettingsComponent.Instance.GetNormalSpeed() * 0.5f;
     }
 
+    private void GenerateSegments()
+    {
+        _segments.Clear();
+        
+        for (int i = 0; i < 4; i++)
+        {
+            _segments.Add(RandomSegment(SpeedType.NORMAL));
+        }
+
+        _segments.Add(new RandomFoodSegment(false, SpeedType.NORMAL));
+        _segments.Add(new CorridorsOfDeath01Segment(SpeedType.SLOW));
+        _segments.Add(new RandomFoodSegment(false, SpeedType.FAST));
+            
+        for (int i = 0; i < 10; i++)
+        {
+            _segments.Add(RandomSegment(SpeedType.FAST));
+        }
+        
+        _segments.Add(new EndLevelRhythmItemsSegment());        
+    }
+
+    private RhythmItemsSegment RandomSegment(SpeedType speedType)
+    {
+        var randomSegmentIndex = Random.Range(0, 6);
+
+        switch (randomSegmentIndex)
+        {
+            case 0:
+                return new RandomFoodSegment(false, speedType);
+            case 1:
+                return new RandomFoodSegment(true, speedType);     
+            case 2:
+                return new CorridorsOfLife01Segment(speedType);
+            case 3:
+                return new CorridorsOfLife02Segment(speedType);
+            case 4:
+                return new BabkaLovushkaDjockera(speedType);
+            case 5:
+                return new BabkaCrissCross(speedType);
+        }
+        
+        return new RandomFoodSegment(false, speedType);
+    }
+    
+    private void ActivateNextSegment()
+    {
+        _currentSegmentIndex++;
+
+        if (_currentSegmentIndex < _segments.Count)
+        {
+            var segment = _segments[_currentSegmentIndex];
+
+            SpawnStartSegment(0, segment);
+            SpawnStartSegment(1, segment);
+            SpawnStartSegment(2, segment);
+            SpawnStartSegment(3, segment);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!GameState.ShouldStartGameplayRightNow)
@@ -89,7 +135,7 @@ public class RhythmItemsController : MonoBehaviour
             return;
         }
         
-        if (_currentSegmentIndex < _segments.Length)
+        if (_currentSegmentIndex < _segments.Count)
         {
             _previousSpawnTravelledLength += GlobalGameplaySettingsComponent.Instance.DownSpeed * Time.fixedDeltaTime;
 
