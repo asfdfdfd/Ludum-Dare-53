@@ -61,6 +61,11 @@ public class BirdController : MonoBehaviour
 
     private void Update()
     {
+        if (!GameState.ShouldStartGameplayRightNow)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveLeft();

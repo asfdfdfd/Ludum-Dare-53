@@ -72,6 +72,11 @@ public class RhythmItemsController : MonoBehaviour
     
     private void Start()
     {
+        if (!GameState.ShouldStartGameplayRightNow)
+        {
+            return;
+        }
+        
         ActivateNextSegment();
 
         _normalLengthBetweenItems = GlobalGameplaySettingsComponent.Instance.GetNormalSpeed() * 0.5f;
@@ -79,6 +84,11 @@ public class RhythmItemsController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameState.ShouldStartGameplayRightNow)
+        {
+            return;
+        }
+        
         if (_currentSegmentIndex < _segments.Length)
         {
             _previousSpawnTravelledLength += GlobalGameplaySettingsComponent.Instance.DownSpeed * Time.fixedDeltaTime;

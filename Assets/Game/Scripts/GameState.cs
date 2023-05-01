@@ -4,6 +4,8 @@ public class GameState
 
     public static float TreeSizeCurrent;
     public static float TreeSizeBest;
+
+    public static bool ShouldStartGameplayRightNow = false;
     
     static public void ResetData()
     {

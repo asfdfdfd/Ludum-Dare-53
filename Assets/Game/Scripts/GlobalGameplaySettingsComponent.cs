@@ -26,11 +26,12 @@ public class GlobalGameplaySettingsComponent : MonoBehaviour
 
     public int PointsPerOneRhythmItem => _pointsPerOneRhythmItem;
 
-    public static GlobalGameplaySettingsComponent Instance =>
-        GameObject.Find("MetaGameObjects").GetComponent<GlobalGameplaySettingsComponent>();
-
+    public static GlobalGameplaySettingsComponent Instance;
+    
     private void Awake()
     {
+        Instance = GameObject.Find("MetaGameObjects").GetComponent<GlobalGameplaySettingsComponent>();
+        
         SetNormalSpeed();
     }
 

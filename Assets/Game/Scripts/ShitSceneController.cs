@@ -74,6 +74,8 @@ public class ShitSceneController : MonoBehaviour
             
             _faderImage.DOFade(1.0f, 1.0f).OnComplete(() =>
             {
+                GameState.ResetData();
+                
                 SceneManager.LoadScene("GameplayScene2");
             });
         }
